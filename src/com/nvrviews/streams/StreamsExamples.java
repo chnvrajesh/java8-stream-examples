@@ -58,7 +58,7 @@ public class StreamsExamples {
 	
 	
 	/*
-	 * use filter to filter IT employees and collect it to sublist
+	 * use collect to collect all filter IT employees
 	 */
 	
 	public void exampleCollector(List<Employee> empList) {
@@ -141,7 +141,6 @@ public class StreamsExamples {
 	
 	public void exampleSum(List<Employee> empList) {
 		
-		System.out.println("***** method 2 to use mapToDouble / mapToInt *****");
 		double total = empList.stream()
 				.mapToDouble(Employee::getSalary)
 				.sum();
@@ -157,7 +156,6 @@ public class StreamsExamples {
 	
 	public void exampleAverage(List<Employee> empList) {
 		
-		System.out.println("***** method 2 to use mapToDouble / mapToInt *****");
 		OptionalDouble avarage = empList.stream()
 				.mapToDouble(Employee::getSalary)
 				.average();
