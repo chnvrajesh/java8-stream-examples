@@ -2,6 +2,7 @@ package com.nvrviews.streams;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
@@ -101,36 +102,68 @@ public class StreamsExamples {
 	}
 	
 	/*
-	 * use max to get max salary in the list
+	 * get max salary in the list
+	 * 
+	 * 1. use max on stream<Employee> object
+	 * 2. use max on DoubleStream object
+	 * 3. use DoubleStatistics object
+	 * 
 	 */
 	
 	public void exampleMax(List<Employee> empList) {
+		System.out.println("\n***** Method 1 to use max(Comparator) *****");
 		Optional<Employee> empl = empList.stream()
 			.max(Comparator.comparing(Employee::getSalary));
 		
 		System.out.println("Max Salary among all employees:" + empl.get().getSalary());
+		
+		System.out.println("\n***** Method 2 to use mapToDouble / mapToInt *****");
+		OptionalDouble maxSalary = empList.stream()
+				.mapToDouble(Employee::getSalary)
+				.max();
+		
+		System.out.println("Max Salary among all employees:" + maxSalary);
+		
+		System.out.println("\n***** Method 3 to use mapToDouble / mapToInt *****");
+		DoubleSummaryStatistics sumStats = empList.stream()
+				.mapToDouble(Employee::getSalary)
+				.summaryStatistics();
 
+		System.out.println("Max Salary among all employees:" + sumStats);
+		
 		System.out.println("--------------------------------------");
 	}
 	
 	/*
-	 * use min to get min salary in the list
+	 * get min salary in the list
+	 * 
+	 * 1. use min on stream<Employee> object
+	 * 2. use min on DoubleStream object
+	 * 3. use DoubleStatistics object
 	 */
 	
 	public void exampleMin(List<Employee> empList) {
 		
-		System.out.println("***** method 1 to use min(Comparator) *****");
+		System.out.println("\n***** method 1 to use min(Comparator) ****");
 		Optional<Employee> empl = empList.stream()
 			.min(Comparator.comparing(Employee::getSalary));
 		
 		System.out.println("Min Salary among all employees:" + empl.get().getSalary());
 
-		System.out.println("***** method 2 to use mapToDouble / mapToInt *****");
+		System.out.println("\n***** method 2 to use mapToDouble / mapToInt *****\n");
 		OptionalDouble minSalary = empList.stream()
 				.mapToDouble(Employee::getSalary)
 				.min();
 			
-			System.out.println("Min Salary among all employees:" + minSalary.getAsDouble());
+		System.out.println("Min Salary among all employees:" + minSalary.getAsDouble());
+		
+		System.out.println("\n***** Method 3 to use mapToDouble / mapToInt *****\n");
+		DoubleSummaryStatistics sumStats = empList.stream()
+				.mapToDouble(Employee::getSalary)
+				.summaryStatistics();
+		
+		System.out.println("Min Salary among all employees:" + sumStats);
+
 		
 		System.out.println("--------------------------------------");
 	}
